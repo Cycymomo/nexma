@@ -1,0 +1,15 @@
+{
+  "name": "create-react-prisma-app-server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node -r dotenv/config server.js"
+  },
+  "dependencies": {
+    "graphql-yoga": "^1.18.1",
+    "prisma-client-lib": "^1.34.2"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
