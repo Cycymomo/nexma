@@ -4,6 +4,7 @@
   "author": "Cyril Moreau <cyril.moreau0804@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "docker-compose up -d --build"
+    "start": "docker-compose up -d --build",
+    "docker:clean": "docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
   }
 }
