@@ -1,12 +1,12 @@
 # Create React Prisma App
 
 ## Prerequisites
-Install Docker for your OS
-
+  - Install Docker for your OS
+  - Install Prisma
     ❯ npm i -g prisma
 
 ## Run
-You just have to type `npm start` and it will run both client and server.
+You just have to type `npm start` and it will run both client and server inside Docker.
 
 ## Client
 Code is in the `client` directory.

@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "docker-compose up -d --build",
-    "docker:clean": "docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)"
+    "stop": "docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)",
+    "clean": "docker rmi $(docker images -q)"
   }
 }

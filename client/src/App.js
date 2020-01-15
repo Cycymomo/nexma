@@ -13,16 +13,16 @@ const browserHistory = createBrowserHistory()
 
 class App extends Component {
   state = {
-    token: localStorage.getItem('graphcool-auth-token'),
+    token: localStorage.getItem('token'),
   }
 
   userDidSignIn = token => {
     this.setState({ token })
-    localStorage.setItem('graphcool-auth-token', token)
+    localStorage.setItem('token', token)
   }
 
   logout = () => {
-    localStorage.removeItem('graphcool-auth-token')
+    localStorage.removeItem('token')
     this.setState({ token: null })
   }
 
@@ -67,7 +67,7 @@ class App extends Component {
       <Router history={browserHistory}>
         <div className="app">
           <header className="app-header">
-            <h1 className="app-title">CRAP !</h1>
+            <h1 className="app-title">CRAP - Create React App with Prisma</h1>
             <Link to="/" href="/">
               Home
             </Link>
