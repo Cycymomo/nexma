@@ -67,7 +67,7 @@ class App extends Component {
       <Router history={browserHistory}>
         <div className="app">
           <header className="app-header">
-            <h1 className="app-title">CRAP - Create React App with Prisma</h1>
+            <h1 className="app-title">CRAPrisma - Create React App with Prisma</h1>
             <Link to="/" href="/">
               Home
             </Link>

@@ -1,4 +1,4 @@
-# Create React Prisma App
+# CRAPrisma - Create React App with Prisma
 
 ## Prerequisites
   - Install Docker for your OS
