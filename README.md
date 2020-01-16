@@ -27,11 +27,12 @@ You can access your server GraphQL playground via http://localhost:4000
 ## Prisma
 Code is in the `server/prisma` directory.
 
-You can access your admin GraphQL playground via http://localhost:4466
+You can access your admin GraphQL playground via http://localhost:PRISMA_PORT
 
-You can manage your data via http://localhost:4466/_admin
+You can manage your data via http://localhost:PRISMA_PORT/_admin
 
 Generate token (you need to add it in HTTP HEADERS of the admin GraphQL playground + `_admin`)
+
     ❯ cd server/prisma && prisma token
 
 Deploy `prisma` (when you make change to your data structure. Prisma server must running)
