@@ -11,7 +11,7 @@
     ❯ cp .env.example .env && cp server/.env.example server/.env && cp server/.env.example server/prisma/.env
 
 ## Run
-You just have to type `npm start` and it will run both client and server inside Docker.
+You just have to type `npm start` and it will run: mysql, prisma, server and client inside Docker.
 
 ## Client
 Code is in the `client` directory.
@@ -31,9 +31,9 @@ You can access your admin GraphQL playground via http://localhost:4466
 
 You can manage your data via http://localhost:4466/_admin
 
-Generate token
+Generate token (you need to add it in HTTP HEADERS of the admin GraphQL playground + `_admin`)
     ❯ cd server/prisma && prisma token
 
-Deploy `prisma`
+Deploy `prisma` (when you make change to your data structure. Prisma server must running)
 
     ❯ cd server/prisma && prisma deploy

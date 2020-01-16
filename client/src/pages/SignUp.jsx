@@ -13,7 +13,7 @@ class SignUp extends Component {
     const { email, password } = this.state
     return (
       <Mutation mutation={signupUserMutation}>
-        {signupUser => (
+        {createUser => (
           <div>
             <div>
               <input
@@ -31,7 +31,7 @@ class SignUp extends Component {
             </div>
             <button
               onClick={() =>
-                signupUser({
+                createUser({
                   variables: {
                     email,
                     password,
