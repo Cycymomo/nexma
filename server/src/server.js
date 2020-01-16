@@ -3,10 +3,11 @@ const { GraphQLServer } = require('graphql-yoga')
 const resolvers = require('./resolvers.js')
 
 const server = new GraphQLServer({
-  typeDefs: './schema.graphql',
+  typeDefs: './src/schema.graphql',
   resolvers,
-  context: {
+  context: request => ({
+    ...request,
     prisma,
-  },
+  }),
 })
 server.start(() => console.log('Server is running on http://localhost:4000'))
