@@ -29,8 +29,8 @@ const resolvers = {
         data: { published: true },
       })
     },
-    createUser(root, { name, email, password }, context) {
-      return context.prisma.createUser({ name, email, password })
+    signup(root, { name, email, password }, context) {
+      return context.prisma.signup({ name, email, password })
     },
   },
   User: {

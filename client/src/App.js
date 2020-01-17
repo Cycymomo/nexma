@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history'
 
 import Home from './pages/Home.jsx'
 import SignUp from './pages/SignUp.jsx'
-import SignIn from './pages/SignIn.jsx'
+import Login from './pages/Login.jsx'
 import About from './pages/About.jsx'
 import NotFound from './pages/NotFound.jsx'
 import './App.css'
@@ -16,9 +16,13 @@ class App extends Component {
     token: localStorage.getItem('token'),
   }
 
-  userDidSignIn = token => {
+  userDidLogin = token => {
     this.setState({ token })
     localStorage.setItem('token', token)
+  }
+
+  userDidSignUp = token => {
+    // TODO: login ?
   }
 
   logout = () => {
@@ -54,7 +58,7 @@ class App extends Component {
           ) : (
             <Redirect
               to={{
-                pathname: '/signin',
+                pathname: '/login',
                 state: { from: props.location },
               }}
             />
@@ -83,8 +87,8 @@ class App extends Component {
                 <Link to="/signup" href="/signup">
                   Sign Up
                 </Link>
-                <Link to="/signin" href="/signin">
-                  Sign in
+                <Link to="/login" href="/login">
+                  Login
                 </Link>
               </span>
             )}
@@ -92,12 +96,12 @@ class App extends Component {
           <div className="app-content">
             <Switch>
               <Route exact path="/" component={Home} />
-              <NotLoggedRoute exact path="/signup" component={SignUp} />
+              <NotLoggedRoute exact path="/signup" component={SignUp} userDidSignUp={this.userDidSignUp} />
               <NotLoggedRoute
                 exact
-                path="/signin"
-                component={SignIn}
-                userDidSignIn={this.userDidSignIn}
+                path="/login"
+                component={Login}
+                userDidLogin={this.Login}
               />
               <LoggedRoute exact path="/about" component={About} />
               <Route component={NotFound} />

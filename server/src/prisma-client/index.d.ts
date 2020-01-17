@@ -287,7 +287,7 @@ export interface UserCreateWithoutPostsInput {
   id?: Maybe<ID_Input>;
   email: String;
   password: String;
-  name: String;
+  name?: Maybe<String>;
 }
 
 export interface PostUpdateInput {
@@ -325,7 +325,7 @@ export interface UserCreateInput {
   id?: Maybe<ID_Input>;
   email: String;
   password: String;
-  name: String;
+  name?: Maybe<String>;
   posts?: Maybe<PostCreateManyWithoutAuthorInput>;
 }
 
@@ -496,7 +496,7 @@ export interface User {
   id: ID_Output;
   email: String;
   password: String;
-  name: String;
+  name?: String;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
@@ -774,7 +774,7 @@ export interface UserPreviousValues {
   id: ID_Output;
   email: String;
   password: String;
-  name: String;
+  name?: String;
 }
 
 export interface UserPreviousValuesPromise

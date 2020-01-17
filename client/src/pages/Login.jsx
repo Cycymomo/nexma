@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 
-import signupMutation from '../apollo/mutations/signup'
+import loginMutation from '../apollo/mutations/login'
 
-class SignUp extends Component {
+class Login extends Component {
   static propTypes = {
     history: PropTypes.shape().isRequired,
-    userDidSignUp: PropTypes.func.isRequired,
+    userDidLogin: PropTypes.func.isRequired,
   }
 
   state = {
@@ -16,21 +16,21 @@ class SignUp extends Component {
     error: '',
   }
 
-  signUp = async signup => {
+  login = async login => {
     const { email, password } = this.state
     try {
       const {
         data: {
-          signup: { token },
+          login: { token },
         },
-      } = await signup({
+      } = await login({
         variables: {
           email,
           password,
         },
       })
 
-      this.props.userDidSignUp(token)
+      this.props.userDidLogin(token)
       this.props.history.push('/')
     } catch ({ message: error }) {
       this.setState({ error })
@@ -40,10 +40,10 @@ class SignUp extends Component {
   render() {
     const { email, password, error } = this.state
     return (
-      <Mutation mutation={signupMutation}>
-        {signup => (
+      <Mutation mutation={loginMutation}>
+        {login => (
           <div>
-            <h1>Create an account</h1>
+            <h1>Login</h1>
             { error && <div style={{color: '#f00'}}>${error}</div> }
             <div>
               <input
@@ -59,11 +59,7 @@ class SignUp extends Component {
                 placeholder="Enter your password"
               />
             </div>
-            <button
-              onClick={() => this.signUp(signup)}
-            >
-              Submit
-            </button>
+            <button onClick={() => this.login(login)}>Submit</button>
           </div>
         )}
       </Mutation>
@@ -71,4 +67,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp
+export default Login
