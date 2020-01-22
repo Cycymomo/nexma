@@ -1,14 +1,14 @@
-# CRAPrisma - Create React App with Prisma
+# CRAPrisma - Create React App with Prisma 2
 
 ## Prerequisites
   - Install Docker for your OS
-  - Install Prisma
+  - Install Prisma 2
 
-    ❯ npm i -g prisma
+    ❯ npm i -g prisma2
 
   - Create your `.env` files and set your env
 
-    ❯ cp .env.example .env && cp server/.env.example server/.env && cp server/.env.example server/prisma/.env
+    ❯ cp .env.example .env && cp server/.env.example server/.env
 
 ## Run
 You just have to type `npm start` and it will run: mysql, prisma, server and client inside Docker.
@@ -21,20 +21,25 @@ You can access it via http://localhost:3000
 
 ## Server
 Code is in the `server` directory.
+It's performed by GraphQL Yoga.
 
 You can access your server GraphQL playground via http://localhost:4000
 
 ## Prisma
 Code is in the `server/prisma` directory.
 
-You can access your admin GraphQL playground via http://localhost:PRISMA_PORT
+You can access your Prisma Studio via http://localhost:PRISMA_PORT
 
-You can manage your data via http://localhost:PRISMA_PORT/_admin
+Generate a `token`
 
-Generate token (you need to add it in HTTP HEADERS of the admin GraphQL playground + `_admin`)
+    ❯ cd server/prisma && prisma2 token
 
-    ❯ cd server/prisma && prisma token
+Deploy `prisma`
 
-Deploy `prisma` (when you make change to your data structure. Prisma server must running)
+  - When you make change to your schema
 
-    ❯ cd server/prisma && prisma deploy
+    ❯ cd server/prisma && prisma2 lift save
+
+  - When you want to push your changes
+
+    ❯ cd server/prisma && prisma2 lift up

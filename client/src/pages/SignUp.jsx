@@ -12,12 +12,13 @@ class SignUp extends Component {
 
   state = {
     email: '',
+    name: '',
     password: '',
     error: '',
   }
 
   signUp = async signup => {
-    const { email, password } = this.state
+    const { email, name, password } = this.state
     try {
       const {
         data: {
@@ -26,6 +27,7 @@ class SignUp extends Component {
       } = await signup({
         variables: {
           email,
+          name,
           password,
         },
       })
@@ -38,7 +40,7 @@ class SignUp extends Component {
   }
 
   render() {
-    const { email, password, error } = this.state
+    const { email, name, password, error } = this.state
     return (
       <Mutation mutation={signupMutation}>
         {signup => (
@@ -46,6 +48,12 @@ class SignUp extends Component {
             <h1>Create an account</h1>
             { error && <div style={{color: '#f00'}}>${error}</div> }
             <div>
+              <input
+                value={name}
+                onChange={({ target: { value: name } }) => this.setState({ name })}
+                type="text"
+                placeholder="Enter your name"
+              />
               <input
                 value={email}
                 onChange={({ target: { value: email } }) => this.setState({ email })}
