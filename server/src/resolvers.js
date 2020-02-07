@@ -30,7 +30,7 @@ const resolvers = {
       })
     },
     signup(root, { name, email, password }, context) {
-      return context.prisma.signup({ name, email, password })
+      return context.prisma.createUser({ name, email, password })
     },
   },
   User: {

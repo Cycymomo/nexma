@@ -275,7 +275,7 @@ export interface PostCreateInput {
   id?: Maybe<ID_Input>;
   title: String;
   published?: Maybe<Boolean>;
-  author?: Maybe<UserCreateOneWithoutPostsInput>;
+  author: UserCreateOneWithoutPostsInput;
 }
 
 export interface UserCreateOneWithoutPostsInput {
@@ -293,15 +293,13 @@ export interface UserCreateWithoutPostsInput {
 export interface PostUpdateInput {
   title?: Maybe<String>;
   published?: Maybe<Boolean>;
-  author?: Maybe<UserUpdateOneWithoutPostsInput>;
+  author?: Maybe<UserUpdateOneRequiredWithoutPostsInput>;
 }
 
-export interface UserUpdateOneWithoutPostsInput {
+export interface UserUpdateOneRequiredWithoutPostsInput {
   create?: Maybe<UserCreateWithoutPostsInput>;
   update?: Maybe<UserUpdateWithoutPostsDataInput>;
   upsert?: Maybe<UserUpsertWithoutPostsInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
