@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history'
 import Home from './pages/Home.jsx'
 import SignUp from './pages/SignUp.jsx'
 import Login from './pages/Login.jsx'
-import About from './pages/About.jsx'
+import Profile from './pages/Profile.jsx'
 import NotFound from './pages/NotFound.jsx'
 import './App.css'
 
@@ -17,11 +17,6 @@ class App extends Component {
   }
 
   userDidLogin = token => {
-    this.setState({ token })
-    localStorage.setItem('token', token)
-  }
-
-  userDidSignUp = token => {
     this.setState({ token })
     localStorage.setItem('token', token)
   }
@@ -78,8 +73,8 @@ class App extends Component {
             </Link>
             {token ? (
               <span>
-                <Link to="/about" href="/about">
-                  About
+                <Link to="/profile" href="/profile">
+                  Profile
                 </Link>
                 <button onClick={this.logout}>Logout</button>
               </span>
@@ -97,14 +92,14 @@ class App extends Component {
           <div className="app-content">
             <Switch>
               <Route exact path="/" component={Home} />
-              <NotLoggedRoute exact path="/signup" component={SignUp} userDidSignUp={this.userDidSignUp} />
+              <NotLoggedRoute exact path="/signup" component={SignUp} userDidLogin={this.userDidLogin} />
               <NotLoggedRoute
                 exact
                 path="/login"
                 component={Login}
                 userDidLogin={this.userDidLogin}
               />
-              <LoggedRoute exact path="/about" component={About} />
+              <LoggedRoute exact path="/profile" component={Profile} />
               <Route component={NotFound} />
             </Switch>
           </div>

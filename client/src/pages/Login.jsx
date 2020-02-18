@@ -31,7 +31,7 @@ class Login extends Component {
       })
 
       this.props.userDidLogin(token)
-      this.props.history.push('/')
+      this.props.history.push('/profile')
     } catch ({ message: error }) {
       this.setState({ error })
     }

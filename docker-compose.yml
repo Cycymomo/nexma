@@ -7,7 +7,7 @@ services:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_DATABASE: prisma
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - mysql:/var/lib/mysql
@@ -33,6 +33,7 @@ services:
           default:
             connector: mysql
             host: mysql
+            database: ${MYSQL_DATABASE}
             port: ${MYSQL_ROOT_PORT}
             user: ${MYSQL_ROOT_USER}
             password: ${MYSQL_ROOT_PASSWORD}

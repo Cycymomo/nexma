@@ -7,7 +7,15 @@ import App from './App'
 import { unregister } from './serviceWorker'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000'
+  uri: 'http://localhost:4000',
+  request: req => {
+    const token = localStorage.getItem('token')
+    req.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    })
+  }
 })
 
 const ApolloApp = AppComponent => (

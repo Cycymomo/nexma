@@ -7,7 +7,7 @@ import signupMutation from '../apollo/mutations/signup'
 class SignUp extends Component {
   static propTypes = {
     history: PropTypes.shape().isRequired,
-    userDidSignUp: PropTypes.func.isRequired,
+    userDidLogin: PropTypes.func.isRequired,
   }
 
   state = {
@@ -32,7 +32,7 @@ class SignUp extends Component {
         },
       })
 
-      this.props.userDidSignUp(token)
+      this.props.userDidLogin(token)
       this.props.history.push('/')
     } catch ({ message: error }) {
       this.setState({ error })
