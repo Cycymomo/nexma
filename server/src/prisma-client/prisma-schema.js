@@ -15,6 +15,8 @@ type BatchPayload {
   count: Long!
 }
 
+scalar DateTime
+
 scalar Long
 
 type Mutation {
@@ -52,8 +54,11 @@ type PageInfo {
 type Post {
   id: ID!
   title: String!
+  content: String
   published: Boolean!
   author: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type PostConnection {
@@ -65,6 +70,7 @@ type PostConnection {
 input PostCreateInput {
   id: ID
   title: String!
+  content: String
   published: Boolean
   author: UserCreateOneWithoutPostsInput!
 }
@@ -77,6 +83,7 @@ input PostCreateManyWithoutAuthorInput {
 input PostCreateWithoutAuthorInput {
   id: ID
   title: String!
+  content: String
   published: Boolean
 }
 
@@ -90,14 +97,23 @@ enum PostOrderByInput {
   id_DESC
   title_ASC
   title_DESC
+  content_ASC
+  content_DESC
   published_ASC
   published_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type PostPreviousValues {
   id: ID!
   title: String!
+  content: String
   published: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input PostScalarWhereInput {
@@ -129,8 +145,38 @@ input PostScalarWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
   published: Boolean
   published_not: Boolean
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [PostScalarWhereInput!]
   OR: [PostScalarWhereInput!]
   NOT: [PostScalarWhereInput!]
@@ -156,17 +202,20 @@ input PostSubscriptionWhereInput {
 
 input PostUpdateInput {
   title: String
+  content: String
   published: Boolean
   author: UserUpdateOneRequiredWithoutPostsInput
 }
 
 input PostUpdateManyDataInput {
   title: String
+  content: String
   published: Boolean
 }
 
 input PostUpdateManyMutationInput {
   title: String
+  content: String
   published: Boolean
 }
 
@@ -189,6 +238,7 @@ input PostUpdateManyWithWhereNestedInput {
 
 input PostUpdateWithoutAuthorDataInput {
   title: String
+  content: String
   published: Boolean
 }
 
@@ -232,9 +282,39 @@ input PostWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  content: String
+  content_not: String
+  content_in: [String!]
+  content_not_in: [String!]
+  content_lt: String
+  content_lte: String
+  content_gt: String
+  content_gte: String
+  content_contains: String
+  content_not_contains: String
+  content_starts_with: String
+  content_not_starts_with: String
+  content_ends_with: String
+  content_not_ends_with: String
   published: Boolean
   published_not: Boolean
   author: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [PostWhereInput!]
   OR: [PostWhereInput!]
   NOT: [PostWhereInput!]
@@ -263,7 +343,7 @@ type User {
   id: ID!
   email: String!
   password: String!
-  name: String
+  name: String!
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
 }
 
@@ -313,7 +393,7 @@ type UserPreviousValues {
   id: ID!
   email: String!
   password: String!
-  name: String
+  name: String!
 }
 
 type UserSubscriptionPayload {

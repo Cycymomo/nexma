@@ -22,7 +22,8 @@ class App extends Component {
   }
 
   userDidSignUp = token => {
-    // TODO: login ?
+    this.setState({ token })
+    localStorage.setItem('token', token)
   }
 
   logout = () => {
@@ -101,7 +102,7 @@ class App extends Component {
                 exact
                 path="/login"
                 component={Login}
-                userDidLogin={this.Login}
+                userDidLogin={this.userDidLogin}
               />
               <LoggedRoute exact path="/about" component={About} />
               <Route component={NotFound} />

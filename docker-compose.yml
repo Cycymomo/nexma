@@ -24,6 +24,8 @@ services:
       - '${PRISMA_PORT}:${PRISMA_PORT}'
     environment:
       MYSQL_URL: ${MYSQL_URL}
+      PRISMA_MANAGEMENT_API_SECRET: ${PRISMA_MANAGEMENT_API_SECRET}
+      PRISMA_URL: ${PRISMA_URL}
       PRISMA_CONFIG: |
         managementApiSecret: ${PRISMA_MANAGEMENT_API_SECRET}
         port: ${PRISMA_PORT}
@@ -50,6 +52,8 @@ services:
       dockerfile: Dockerfile
       args:
         MYSQL_URL: ${MYSQL_URL}
+        PRISMA_MANAGEMENT_API_SECRET: ${PRISMA_MANAGEMENT_API_SECRET}
+        PRISMA_URL: ${PRISMA_URL}
         CLIENT_URL: ${CLIENT_URL}
     volumes:
       - './server:/usr/src/server'
@@ -57,6 +61,8 @@ services:
     environment:
       NODE_ENV: development
       MYSQL_URL: ${MYSQL_URL}
+      PRISMA_MANAGEMENT_API_SECRET: ${PRISMA_MANAGEMENT_API_SECRET}
+      PRISMA_URL: ${PRISMA_URL}
       CLIENT_URL: ${CLIENT_URL}
   client:
     container_name: client

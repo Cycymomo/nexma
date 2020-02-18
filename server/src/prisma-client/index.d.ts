@@ -145,8 +145,14 @@ export type PostOrderByInput =
   | "id_DESC"
   | "title_ASC"
   | "title_DESC"
+  | "content_ASC"
+  | "content_DESC"
   | "published_ASC"
-  | "published_DESC";
+  | "published_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -193,9 +199,39 @@ export interface PostWhereInput {
   title_not_starts_with?: Maybe<String>;
   title_ends_with?: Maybe<String>;
   title_not_ends_with?: Maybe<String>;
+  content?: Maybe<String>;
+  content_not?: Maybe<String>;
+  content_in?: Maybe<String[] | String>;
+  content_not_in?: Maybe<String[] | String>;
+  content_lt?: Maybe<String>;
+  content_lte?: Maybe<String>;
+  content_gt?: Maybe<String>;
+  content_gte?: Maybe<String>;
+  content_contains?: Maybe<String>;
+  content_not_contains?: Maybe<String>;
+  content_starts_with?: Maybe<String>;
+  content_not_starts_with?: Maybe<String>;
+  content_ends_with?: Maybe<String>;
+  content_not_ends_with?: Maybe<String>;
   published?: Maybe<Boolean>;
   published_not?: Maybe<Boolean>;
   author?: Maybe<UserWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<PostWhereInput[] | PostWhereInput>;
   OR?: Maybe<PostWhereInput[] | PostWhereInput>;
   NOT?: Maybe<PostWhereInput[] | PostWhereInput>;
@@ -274,6 +310,7 @@ export type UserWhereUniqueInput = AtLeastOne<{
 export interface PostCreateInput {
   id?: Maybe<ID_Input>;
   title: String;
+  content?: Maybe<String>;
   published?: Maybe<Boolean>;
   author: UserCreateOneWithoutPostsInput;
 }
@@ -292,6 +329,7 @@ export interface UserCreateWithoutPostsInput {
 
 export interface PostUpdateInput {
   title?: Maybe<String>;
+  content?: Maybe<String>;
   published?: Maybe<Boolean>;
   author?: Maybe<UserUpdateOneRequiredWithoutPostsInput>;
 }
@@ -316,6 +354,7 @@ export interface UserUpsertWithoutPostsInput {
 
 export interface PostUpdateManyMutationInput {
   title?: Maybe<String>;
+  content?: Maybe<String>;
   published?: Maybe<Boolean>;
 }
 
@@ -335,6 +374,7 @@ export interface PostCreateManyWithoutAuthorInput {
 export interface PostCreateWithoutAuthorInput {
   id?: Maybe<ID_Input>;
   title: String;
+  content?: Maybe<String>;
   published?: Maybe<Boolean>;
 }
 
@@ -372,6 +412,7 @@ export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
 
 export interface PostUpdateWithoutAuthorDataInput {
   title?: Maybe<String>;
+  content?: Maybe<String>;
   published?: Maybe<Boolean>;
 }
 
@@ -410,8 +451,38 @@ export interface PostScalarWhereInput {
   title_not_starts_with?: Maybe<String>;
   title_ends_with?: Maybe<String>;
   title_not_ends_with?: Maybe<String>;
+  content?: Maybe<String>;
+  content_not?: Maybe<String>;
+  content_in?: Maybe<String[] | String>;
+  content_not_in?: Maybe<String[] | String>;
+  content_lt?: Maybe<String>;
+  content_lte?: Maybe<String>;
+  content_gt?: Maybe<String>;
+  content_gte?: Maybe<String>;
+  content_contains?: Maybe<String>;
+  content_not_contains?: Maybe<String>;
+  content_starts_with?: Maybe<String>;
+  content_not_starts_with?: Maybe<String>;
+  content_ends_with?: Maybe<String>;
+  content_not_ends_with?: Maybe<String>;
   published?: Maybe<Boolean>;
   published_not?: Maybe<Boolean>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
   OR?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
   NOT?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
@@ -424,6 +495,7 @@ export interface PostUpdateManyWithWhereNestedInput {
 
 export interface PostUpdateManyDataInput {
   title?: Maybe<String>;
+  content?: Maybe<String>;
   published?: Maybe<Boolean>;
 }
 
@@ -462,14 +534,20 @@ export interface NodeNode {
 export interface Post {
   id: ID_Output;
   title: String;
+  content?: String;
   published: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface PostPromise extends Promise<Post>, Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
+  content: () => Promise<String>;
   published: () => Promise<Boolean>;
   author: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface PostSubscription
@@ -477,8 +555,11 @@ export interface PostSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   title: () => Promise<AsyncIterator<String>>;
+  content: () => Promise<AsyncIterator<String>>;
   published: () => Promise<AsyncIterator<Boolean>>;
   author: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface PostNullablePromise
@@ -486,15 +567,18 @@ export interface PostNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
+  content: () => Promise<String>;
   published: () => Promise<Boolean>;
   author: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface User {
   id: ID_Output;
   email: String;
   password: String;
-  name?: String;
+  name: String;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
@@ -724,7 +808,10 @@ export interface PostSubscriptionPayloadSubscription
 export interface PostPreviousValues {
   id: ID_Output;
   title: String;
+  content?: String;
   published: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface PostPreviousValuesPromise
@@ -732,7 +819,10 @@ export interface PostPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
+  content: () => Promise<String>;
   published: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface PostPreviousValuesSubscription
@@ -740,7 +830,10 @@ export interface PostPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   title: () => Promise<AsyncIterator<String>>;
+  content: () => Promise<AsyncIterator<String>>;
   published: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -772,7 +865,7 @@ export interface UserPreviousValues {
   id: ID_Output;
   email: String;
   password: String;
-  name?: String;
+  name: String;
 }
 
 export interface UserPreviousValuesPromise
@@ -808,6 +901,16 @@ export type String = string;
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
+
+/*
+DateTime scalar input type, allowing Date
+*/
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
