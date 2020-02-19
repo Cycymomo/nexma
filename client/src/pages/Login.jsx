@@ -11,8 +11,8 @@ class Login extends Component {
   }
 
   state = {
-    email: '',
-    password: '',
+    email: 'toto@toto.fr',
+    password: 'toto',
     error: '',
   }
 
@@ -21,7 +21,7 @@ class Login extends Component {
     try {
       const {
         data: {
-          login: { token },
+          login: { name },
         },
       } = await login({
         variables: {
@@ -30,7 +30,9 @@ class Login extends Component {
         },
       })
 
-      this.props.userDidLogin(token)
+
+      this.setState({ email: '', password: '' })
+      this.props.userDidLogin(name)
       this.props.history.push('/profile')
     } catch ({ message: error }) {
       this.setState({ error })
@@ -52,6 +54,8 @@ class Login extends Component {
                 type="text"
                 placeholder="Enter your email"
               />
+            </div>
+            <div>
               <input
                 value={password}
                 onChange={({ target: { value: password } }) => this.setState({ password })}

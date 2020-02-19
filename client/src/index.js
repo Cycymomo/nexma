@@ -8,14 +8,13 @@ import { unregister } from './serviceWorker'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000',
-  request: req => {
-    const token = localStorage.getItem('token')
-    req.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : ''
-      }
+  request: operation => {
+    operation.setContext({
+      fetchOptions: {
+        credentials: 'include',
+      },
     })
-  }
+  },
 })
 
 const ApolloApp = AppComponent => (

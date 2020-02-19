@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Router, Route, Link, Switch, Redirect } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
+import { Mutation } from 'react-apollo'
+
+import logoutMutation from './apollo/mutations/logout'
 
 import Home from './pages/Home.jsx'
 import SignUp from './pages/SignUp.jsx'
@@ -13,26 +16,27 @@ const browserHistory = createBrowserHistory()
 
 class App extends Component {
   state = {
-    token: localStorage.getItem('token'),
+    name: localStorage.getItem('name'),
   }
 
-  userDidLogin = token => {
-    this.setState({ token })
-    localStorage.setItem('token', token)
+  userDidLogin = name => {
+    this.setState({ name })
+    localStorage.setItem('name', name)
   }
 
-  logout = () => {
-    localStorage.removeItem('token')
-    this.setState({ token: null })
+  logout = logout => {
+    localStorage.removeItem('name')
+    this.setState({ name: null })
+    logout()
   }
 
   render() {
-    const { token } = this.state
+    const { name } = this.state
     const NotLoggedRoute = ({ component: Comp, ...params }) => (
       <Route
         {...params}
         render={props =>
-          token ? (
+          name ? (
             <Redirect
               to={{
                 pathname: '/',
@@ -49,7 +53,7 @@ class App extends Component {
       <Route
         {...params}
         render={props =>
-          token ? (
+          name ? (
             <Comp {...props} {...params} />
           ) : (
             <Redirect
@@ -71,34 +75,33 @@ class App extends Component {
             <Link to="/" href="/">
               Home
             </Link>
-            {token ? (
-              <span>
-                <Link to="/profile" href="/profile">
-                  Profile
-                </Link>
-                <button onClick={this.logout}>Logout</button>
-              </span>
-            ) : (
-              <span>
-                <Link to="/signup" href="/signup">
-                  Sign Up
-                </Link>
-                <Link to="/login" href="/login">
-                  Login
-                </Link>
-              </span>
-            )}
+            {
+              name ? (
+                <span>
+                  <Link to="/profile" href="/profile">
+                    Profile
+                  </Link>
+                  <Mutation mutation={logoutMutation}>
+                    {logout => <button onClick={() => this.logout(logout)}>Logout { name }</button>}
+                  </Mutation>
+                </span>
+              ) : (
+                <span>
+                  <Link to="/signup" href="/signup">
+                    Sign Up
+                  </Link>
+                  <Link to="/login" href="/login">
+                    Login
+                  </Link>
+                </span>
+              )
+            }
           </header>
           <div className="app-content">
             <Switch>
               <Route exact path="/" component={Home} />
               <NotLoggedRoute exact path="/signup" component={SignUp} userDidLogin={this.userDidLogin} />
-              <NotLoggedRoute
-                exact
-                path="/login"
-                component={Login}
-                userDidLogin={this.userDidLogin}
-              />
+              <NotLoggedRoute exact path="/login" component={Login} userDidLogin={this.userDidLogin} />
               <LoggedRoute exact path="/profile" component={Profile} />
               <Route component={NotFound} />
             </Switch>

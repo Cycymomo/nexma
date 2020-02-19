@@ -18,9 +18,8 @@ type Post {
   updatedAt: DateTime!
 }
 
-type AuthPayload {
-  token: String!
-  user: User!
+type SuccessMessage {
+  message: String
 }
 
 type Query {
@@ -34,6 +33,7 @@ type Mutation {
   createDraft(title: String!, content: String): Post!
   deletePost(id: ID!): Post
   publish(id: ID!): Post
-  signup(name: String!, email: String!, password: String!): AuthPayload!
-  login(email: String!, password: String!): AuthPayload!
+  signup(name: String!, email: String!, password: String!): User!
+  login(email: String!, password: String!): User!
+  logout: SuccessMessage
 }

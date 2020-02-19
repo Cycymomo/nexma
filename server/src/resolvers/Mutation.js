@@ -1,6 +1,5 @@
 const { hash, compare } = require('bcryptjs')
 const { sign } = require('jsonwebtoken')
-const { APP_SECRET, getUserId } = require('../utils')
 
 const Mutation = {
   signup: async (parent, { name, email, password }, context) => {
@@ -10,10 +9,12 @@ const Mutation = {
       email,
       password: hashedPassword,
     })
-    return {
-      token: sign({ userId: user.id }, APP_SECRET),
-      user,
-    }
+    const token = sign({ userId: user.id }, process.env.PRISMA_MANAGEMENT_API_SECRET)
+    context.response.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 30,
+    })
+    return user
   },
   login: async (parent, { email, password }, context) => {
     const user = await context.prisma.user({ email })
@@ -24,17 +25,22 @@ const Mutation = {
     if (!passwordValid) {
       throw new Error('Invalid password')
     }
-    return {
-      token: sign({ userId: user.id }, APP_SECRET),
-      user,
-    }
+    const token = sign({ userId: user.id }, process.env.PRISMA_MANAGEMENT_API_SECRET)
+    context.response.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 30,
+    })
+    return user
+  },
+  logout: (parent, args, context) => {
+    context.response.clearCookie('token')
+    return { message: 'See you !' }
   },
   createDraft: async (parent, { title, content }, context) => {
-    const userId = getUserId(context)
     return context.prisma.createPost({
       title,
       content,
-      author: { connect: { id: userId } },
+      author: { connect: { id: context.request.userId } },
     })
   },
   deletePost: async (parent, { id }, context) => {

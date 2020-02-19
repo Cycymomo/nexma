@@ -1,19 +1,12 @@
 const { rule, and, shield } = require('graphql-shield')
-const { getUserId } = require('../utils')
 
 const rules = {
   isAuthenticatedUser: rule()((parent, args, context) => {
-    const userId = getUserId(context)
-    return Boolean(userId)
+    return Boolean(context.request.userId)
   }),
   isPostOwner: rule()(async (parent, { id }, context) => {
-    const userId = getUserId(context)
-    const author = await context.prisma
-      .post({
-        id,
-      })
-      .author()
-    return userId === author.id
+    const { authorId } = await context.prisma.post({ id }).author()
+    return context.request.userId === authorId
   }),
 }
 

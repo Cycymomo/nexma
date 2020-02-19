@@ -11,20 +11,16 @@ class SignUp extends Component {
   }
 
   state = {
-    name: 'toto',
-    email: 'toto@toto.fr',
-    password: 'toto',
+    name: '',
+    email: '',
+    password: '',
     error: '',
   }
 
   signUp = async signup => {
     const { name, email, password } = this.state
     try {
-      const {
-        data: {
-          signup: { token },
-        },
-      } = await signup({
+      await signup({
         variables: {
           name,
           email,
@@ -32,8 +28,9 @@ class SignUp extends Component {
         },
       })
 
-      this.props.userDidLogin(token)
-      this.props.history.push('/')
+      this.setState({ name: '', email: '', password: '' })
+      this.props.userDidLogin(name)
+      this.props.history.push('/profile')
     } catch ({ message: error }) {
       this.setState({ error })
     }
