@@ -9,6 +9,7 @@ import Home from './pages/Home.jsx'
 import SignUp from './pages/SignUp.jsx'
 import Login from './pages/Login.jsx'
 import Profile from './pages/Profile.jsx'
+import Post from './pages/Post.jsx'
 import NotFound from './pages/NotFound.jsx'
 import './App.css'
 
@@ -81,6 +82,9 @@ class App extends Component {
                   <Link to="/profile" href="/profile">
                     Profile
                   </Link>
+                  <Link to="/post" href="/post">
+                    Add a post
+                  </Link>
                   <Mutation mutation={logoutMutation}>
                     {logout => <button onClick={() => this.logout(logout)}>Logout { name }</button>}
                   </Mutation>
@@ -103,6 +107,7 @@ class App extends Component {
               <NotLoggedRoute exact path="/signup" component={SignUp} userDidLogin={this.userDidLogin} />
               <NotLoggedRoute exact path="/login" component={Login} userDidLogin={this.userDidLogin} />
               <LoggedRoute exact path="/profile" component={Profile} />
+              <LoggedRoute exact path="/post" component={Post} />
               <Route component={NotFound} />
             </Switch>
           </div>

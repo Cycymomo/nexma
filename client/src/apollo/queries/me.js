@@ -7,7 +7,12 @@ const meQuery = gql`
       email
       name
       posts {
+        id
         title
+        content
+        published
+        createdAt
+        updatedAt
       }
     }
   }
