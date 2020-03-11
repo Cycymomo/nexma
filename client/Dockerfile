@@ -6,7 +6,5 @@ COPY package-lock.json /usr/src/client/package-lock.json
 ENV NODE_PATH=/usr/src/client/node_modules
 ENV PATH=/usr/src/client/node_modules/.bin/:${PATH}
 RUN npm install
-RUN npm run build
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
 EXPOSE 3000
-EXPOSE 35729

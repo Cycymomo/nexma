@@ -69,14 +69,10 @@ services:
     container_name: client
     ports:
       - '3000:3000'
-      - '35729:35729'
-    command: npm start
     build: ./client
     volumes:
       - './client:/usr/src/client'
       - '/usr/src/client/node_modules'
-    environment:
-      - NODE_ENV=development
-      - CHOKIDAR_USEPOLLING=true
+      - '/usr/src/client/.next'
 volumes:
   mysql: ~
