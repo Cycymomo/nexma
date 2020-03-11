@@ -1,4 +1,4 @@
-# CRAPrisma - Create React App with Prisma
+# Nexma - Next.js with Apollo and Prisma
 
 ## Prerequisites
   - Install Docker for your OS
@@ -15,7 +15,7 @@ You just have to type `npm start` and it will run: mysql, prisma, server and cli
 
 ## Client
 Code is in the `client` directory.
-It's a create-react-app with Apollo.
+It's a Next.js app with Apollo.
 
 You can access it via http://localhost:3000
 
