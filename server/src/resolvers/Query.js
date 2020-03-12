@@ -8,20 +8,6 @@ const Query = {
   feed: (parent, args, context) => {
     return context.prisma.posts({ where: { published: true } })
   },
-  filterPosts: (parent, { searchString }, context) => {
-    return context.prisma.posts({
-      where: {
-        OR: [
-          {
-            title_contains: searchString,
-          },
-          {
-            content_contains: searchString,
-          },
-        ],
-      },
-    })
-  },
 }
 
 module.exports = {

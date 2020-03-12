@@ -11,9 +11,7 @@ const rules = {
 }
 
 const permissions = shield({
-  Query: {
-    filterPosts: rules.isAuthenticatedUser,
-  },
+  Query: {},
   Mutation: {
     createDraft: rules.isAuthenticatedUser,
     deletePost: rules.isPostOwner,

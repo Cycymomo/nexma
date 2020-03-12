@@ -25,7 +25,6 @@ type SuccessMessage {
 type Query {
   me: User
   feed: [Post!]!
-  filterPosts(searchString: String): [Post!]!
 }
 
 type Mutation {
