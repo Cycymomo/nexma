@@ -1,0 +1,26 @@
+.post {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 200px;
+  height: 200px;
+  border: solid thin black;
+  padding: 20px;
+  margin: 20px;
+
+  .date {
+    color: grey;
+    font-size: 10px;
+  }
+  .content {
+    text-align: left;
+    padding-top: 10px;
+  }
+  .action {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-bottom: 5px;
+    padding-right: 5px;
+  }
+}

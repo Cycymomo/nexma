@@ -1,11 +1,27 @@
 import { useState } from 'react'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
+
+import Post from '../components/Post'
 
 import meQuery from '../apollo/queries/me'
+import publishMutation from '../apollo/mutations/publish'
+import deletePostMutation from '../apollo/mutations/deletePost'
+
+import css from "../styles/profile.css"
 
 export default function Profile() {
   const [mode, setMode] = useState('draft')
-  const { data: { me } = {}, loading, error } = useQuery(meQuery, { fetchPolicy: 'network-only' })
+  const { data: { me } = {}, loading, error, refetch } = useQuery(meQuery)
+  const [publish, { loading: loadingPublish, error: errorPublish }] = useMutation(publishMutation, {
+    onCompleted() {
+      refetch()
+    }
+  })
+  const [deletePost, { loading: loadingDelete, error: errorDelete }] = useMutation(deletePostMutation, {
+    onCompleted() {
+      refetch()
+    }
+  })
 
   if (loading) {
     return <p>Loading...</p>
@@ -30,16 +46,14 @@ export default function Profile() {
           <button style={{ color: mode === 'published' ? 'blue' : 'black' }} onClick={() => setMode('published')}>Published</button>
         </div>
       </div>
-      <div style={{ width: '800px', padding: '20px' }}>
+      <div className={css.posts}>
+        { errorPublish ? <p>Publish error: {JSON.stringify(errorPublish)}</p> : '' }
+        { errorDelete ? <p>Delete error: {JSON.stringify(errorDelete)}</p> : '' }
         {
           me.posts
-            .filter(post => mode === 'published' ? post.published : !post.published)
-            .map(({ id, title, content, published, createdAt, updatedAt }) => (
-              <div key={id} style={{ display: 'inline-block', verticalAlign: 'top', width: '200px', height: '200px', border: 'solid thin black', padding: '20px', margin: '20px' }}>
-                <div>{ title }</div>
-                <div style={{ color: 'grey', fontSize: '10px' }}>{ createdAt }</div>
-                <div style={{ textAlign: 'left', paddingTop: '10px' }}>{ content }</div>
-              </div>
+            .filter(({ published }) => mode === 'published' ? published : !published)
+            .map(post => (
+              <Post key={post.id} post={post} publish={publish} loadingPublish={loadingPublish} deletePost={deletePost} loadingDelete={loadingDelete} />
             ))
         }
       </div>

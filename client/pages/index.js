@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import { useQuery } from '@apollo/react-hooks'
 
+import Post from '../components/Post'
+
 import feedQuery from '../apollo/queries/feed'
 
 export default function Home() {
@@ -23,20 +25,8 @@ export default function Home() {
         { error ? <p>Error: {JSON.stringify(error)}</p> : '' }
         {
           feed && feed.length > 0
-            ? feed.map(({ author: { name }, title, content, createdAt, updatedAt }) => (
-                <>
-                  <div>
-                    A post from { name } created at { createdAt } { updatedAt ? `(edited at ${ updatedAt })` : '' }
-                  </div>
-                  <div>
-                    { title }
-                  </div>
-                  <div>
-                    { content }
-                  </div>
-                </>
-              ))
-            : (<>No post yet.</>)
+            ? feed.map(post => <Post key={post.id} post={post} />)
+            : (<>No published post yet.</>)
         }
       </div>
     </div>

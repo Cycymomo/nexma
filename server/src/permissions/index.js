@@ -5,7 +5,7 @@ const rules = {
     return Boolean(context.request.userId)
   }),
   isPostOwner: rule()(async (parent, { id }, context) => {
-    const { authorId } = await context.prisma.post({ id }).author()
+    const { id: authorId } = await context.prisma.post({ id }).author()
     return context.request.userId === authorId
   }),
 }
@@ -13,7 +13,6 @@ const rules = {
 const permissions = shield({
   Query: {
     filterPosts: rules.isAuthenticatedUser,
-    post: rules.isAuthenticatedUser,
   },
   Mutation: {
     createDraft: rules.isAuthenticatedUser,

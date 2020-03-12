@@ -22,9 +22,6 @@ const Query = {
       },
     })
   },
-  post: (parent, { id }, context) => {
-    return context.prisma.post({ id })
-  },
 }
 
 module.exports = {
