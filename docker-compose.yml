@@ -51,11 +51,6 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-      args:
-        MYSQL_URL: ${MYSQL_URL}
-        PRISMA_MANAGEMENT_API_SECRET: ${PRISMA_MANAGEMENT_API_SECRET}
-        PRISMA_URL: ${PRISMA_URL}
-        CLIENT_URL: ${CLIENT_URL}
     volumes:
       - './server:/usr/src/server'
       - '/usr/src/server/node_modules'
@@ -67,6 +62,8 @@ services:
       CLIENT_URL: ${CLIENT_URL}
   client:
     container_name: client
+    depends_on:
+      - server
     ports:
       - '3000:3000'
     build: ./client

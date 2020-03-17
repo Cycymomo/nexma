@@ -6,6 +6,9 @@
   "scripts": {
     "start": "docker-compose up -d --build",
     "stop": "docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)",
-    "clean": "docker rmi $(docker images -q)"
+    "clean": "docker rmi $(docker images -q)",
+    "deploy-prisma:dev": "cd ./server/prisma && prisma deploy",
+    "deploy-prisma:prod": "cd ./server/prisma && prisma deploy -e .env.prod",
+    "release": "npm run deploy-prisma:prod && now && now --prod"
   }
 }

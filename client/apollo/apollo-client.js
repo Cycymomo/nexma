@@ -13,7 +13,7 @@ export default withApollo(
         ...(typeof window === 'undefined' && { fetch }),
         headers,
         credentials: 'include',
-        uri: 'http://localhost:4000'
+        uri: process.env.NODE_ENV === 'production' ? process.env.SERVER_URL : 'http://localhost:4000/graphql'
       }),
       cache: new InMemoryCache().restore(initialState || {}),
       ssrMode: typeof window === 'undefined',

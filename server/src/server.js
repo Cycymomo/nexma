@@ -9,7 +9,7 @@ const { resolvers } = require('./resolvers')
 const { permissions } = require('./permissions')
 
 const server = new GraphQLServer({
-  typeDefs: './src/schema.graphql',
+  typeDefs: `${__dirname}/schema.graphql`,
   resolvers,
   middlewares: [permissions],
   context: request => ({
@@ -31,11 +31,12 @@ server.express.use((request, response, next) => {
 
 server.start(
   {
-    port: 4000,
+    endpoint: '/graphql',
+    playground: '/graphql',
     cors: {
       credentials: true,
-      origin: process.env.CLIENT_URL,
+      origin: process.env.NODE_ENV === 'production' ? process.env.CLIENT_URL : 'http://localhost:3000',
     },
   },
-  () => console.log(`Server is running on ${process.env.SERVER_URL}`)
+  () => console.log(`Server is running on ${process.env.NODE_ENV === 'production' ? process.env.SERVER_URL : 'http://localhost:4000/graphql'}`)
 )

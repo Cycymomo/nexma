@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "env": {
+    "SERVER_URL": "https://nexma.now.sh/graphql",
+    "CLIENT_URL": "https://nexma.now.sh",
+    "PRISMA_MANAGEMENT_API_SECRET": "@prisma_management_api_secret",
+    "PRISMA_URL": "@prisma_url"
+  },
+  "builds": [
+    {
+      "src": "client/next.config.js",
+      "use": "@now/next"
+    },
+    {
+      "src": "server/src/server.js",
+      "use": "@now/node",
+      "config": { "maxLambdaSize": "20mb" }
+    }
+  ],
+  "routes": [
+    { "src": "/graphql", "dest": "/server/src/server.js" },
+    {
+      "src": "/(.*)",
+      "dest": "/client/$1",
+      "headers": {
+        "x-request-path": "$1"
+      }
+    }
+  ]
+}

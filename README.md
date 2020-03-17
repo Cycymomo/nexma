@@ -8,9 +8,10 @@
 
   - Create your `.env` files and set your env
 
-    ❯ cp .env.example .env && cp server/.env.example server/.env && cp server/.env.example server/prisma/.env
+    ❯ cp .env.example .env && cp server/.env.example server/.env
+    ❯ cp server/prisma/.env.example server/prisma/.env
 
-## Run
+## Dev
 You just have to type `npm start` and it will run: mysql, prisma, server and client inside Docker.
 
 ## Client
@@ -22,7 +23,7 @@ You can access it via http://localhost:3000
 ## Server
 Code is in the `server` directory.
 
-You can access your server GraphQL playground via http://localhost:4000
+You can access your server GraphQL playground via http://localhost:4000/graphql
 
 ## Prisma
 Code is in the `server/prisma` directory.
@@ -35,6 +36,15 @@ Generate token (you need to add it in HTTP HEADERS of the admin GraphQL playgrou
 
     ❯ cd server/prisma && prisma token
 
-Deploy `prisma` (when you make change to your data structure. Prisma server must running)
+Deploy `prisma` (when you make change to your data structure, to update database. Prisma server must be running)
 
-    ❯ cd server/prisma && prisma deploy
+    ❯ npm run deploy-prisma:dev
+
+## Release
+Make sure you have a `.env.prod` file for prisma and env variables set
+
+    ❯ cp server/prisma/.env.example server/prisma/.env.prod
+
+Then, release `prisma` / `client` and `server` in prod
+
+    ❯ npm run release

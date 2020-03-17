@@ -1,0 +1,7 @@
+**/node_modules
+.next
+Dockerfile
+Dockerfile.prod
+README.MD
+troubleshooting.md
+.env*

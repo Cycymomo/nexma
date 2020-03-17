@@ -9,4 +9,7 @@ module.exports = withCSS({
     }
     return config
   },
+  env: {
+    SERVER_URL: 'https://nexma.now.sh/graphql'
+  },
 })
