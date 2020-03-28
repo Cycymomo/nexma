@@ -1,18 +1,24 @@
+import React from 'react'
 import Head from 'next/head'
 import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
+import useTranslation from 'next-translate/useTranslation'
 
+import Loading from '../components/Loading'
+import Error from '../components/Error'
+import Nav from '../components/Nav'
 import Post from '../components/Post'
 
 import feedQuery from '../apollo/queries/feed'
 
 export default function Home() {
+  const { t, lang } = useTranslation()
   const [search, setSearch] = useState('')
   const { data: { feed } = {}, loading, error } = useQuery(feedQuery)
   let renderFeed = feed
 
   if (loading) {
-    return <p>Loading...</p>
+    return <Loading />
   }
 
   if (!feed) {
@@ -24,15 +30,16 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <>
       <Head>
-        <title>Home</title>
+        <title>{ t('common:menu-home') }</title>
       </Head>
+      <Nav></Nav>
       <div>
-        { error ? <p>Error: {JSON.stringify(error)}</p> : '' }
+        <Error type="feed" error={error ? JSON.stringify(error) : ''} />
         <div>
           <input
-            placeholder="Search a title..." name="search" type="text" required
+            placeholder={ t('home:search-title') } name="search" type="text" required
             value={search} onChange={e => setSearch(e.target.value)} />
         </div>
         <div>
@@ -40,11 +47,11 @@ export default function Home() {
             renderFeed && renderFeed.length > 0
               ? renderFeed.map(post => <Post key={post.id} post={post} />)
               : (
-                search ? <>No results.</> : <>No published post yet.</>
+                search ? <>{ t('home:no-results') }</> : <>{ t('home:no-published') }</>
               )
           }
         </div>
       </div>
-    </div>
+    </>
   )
 }

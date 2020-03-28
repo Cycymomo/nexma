@@ -1,0 +1,10 @@
+{
+  "hi-username": "Hi, {{name}}",
+  "email": "Email: {{email}}",
+  "title-posts": "Posts",
+  "content-posts": "You have {{count}} post.",
+  "content-posts_0": "You don't have any post yet.",
+  "content-posts_plural": "You have {{count}} posts.",
+  "title-drafts": "Drafts",
+  "title-published": "Published"
+}

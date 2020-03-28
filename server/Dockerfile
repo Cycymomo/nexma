@@ -1,4 +1,4 @@
-FROM node:12.2.0-alpine as server
+FROM node:12.6.0-alpine as server
 RUN npm install -g --unsafe-perm prisma
 ADD . /usr/src/server
 WORKDIR /usr/src/server

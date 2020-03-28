@@ -23,4 +23,7 @@
     padding-bottom: 5px;
     padding-right: 5px;
   }
+  .delete {
+    color: red;
+  }
 }

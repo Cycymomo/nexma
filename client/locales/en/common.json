@@ -1,0 +1,18 @@
+{
+  "menu-home": "Home",
+  "menu-profile": "Profile",
+  "menu-add-post": "Add a post",
+  "menu-logout": "Logout {{name}}",
+  "menu-signup": "Sign Up",
+  "menu-login": "Login",
+  "menu-language-name-en": "English",
+  "menu-language-name-fr": "French",
+  "loading": "Loading...",
+  "error": "Error {{type}}: {{error}}",
+  "action-create": "Create",
+  "action-publish": "Publish",
+  "action-delete": "Delete",
+  "action-login": "Login",
+  "action-signup": "Sign Up",
+  "post-from": "a post from {{name}}"
+}
