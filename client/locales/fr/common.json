@@ -1,7 +1,7 @@
 {
   "menu-home": "Accueil",
   "menu-profile": "Profil",
-  "menu-add-post": "Ajouer un post",
+  "menu-add-post": "Ajouter un post",
   "menu-logout": "Déconnexion {{name}}",
   "menu-signup": "Inscription",
   "menu-login": "Connexion",
