@@ -3,8 +3,8 @@
   "env": {
     "SERVER_URL": "https://nexma.now.sh/graphql",
     "CLIENT_URL": "https://nexma.now.sh",
-    "PRISMA_MANAGEMENT_API_SECRET": "@prisma_management_api_secret",
-    "PRISMA_URL": "@prisma_url"
+    "APP_SECRET": "@app_secret",
+    "DATABASE_URL": "@database_url"
   },
   "builds": [
     {

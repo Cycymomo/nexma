@@ -1,4 +1,4 @@
-FROM node:12.6.0-alpine as client
+FROM node:12.6.0 as client
 ADD . /usr/src/client
 WORKDIR /usr/src/client
 COPY package.json /usr/src/client/package.json

@@ -1,7 +1,7 @@
-import css from "../styles/components/post.css"
 import useTranslation from 'next-translate/useTranslation'
 
 import feedQuery from '../apollo/queries/feed'
+import css from "../styles/components/post.css"
 
 export default function Post({
   post: { id, title, content, published, createdAt, updatedAt, author: { name } = {} },

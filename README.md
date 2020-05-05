@@ -2,9 +2,9 @@
 
 ## Prerequisites
   - Install Docker for your OS
-  - Install Prisma
+  - Install Node & npx
 
-    ❯ npm i -g prisma
+    ❯ npm i -g npx
 
   - Install Now
 
@@ -16,7 +16,7 @@
     ❯ cp server/prisma/.env.example server/prisma/.env
 
 ## Dev
-You just have to type `npm start` and it will run: mysql, prisma, server and client inside Docker.
+You just have to type `npm start` and it will run: mysql, server and client inside Docker.
 
 ## Client
 Code is in the `client` directory.
@@ -38,32 +38,22 @@ You can access your server GraphQL playground via http://localhost:4000/graphql
 ## Prisma
 Code is in the `server/prisma` directory.
 
-You can access your admin GraphQL playground via http://localhost:PRISMA_PORT
+Update your local database depending of your shema file
 
-You can manage your data via http://localhost:PRISMA_PORT/_admin
-
-Generate token (you need to add it in HTTP HEADERS of the admin GraphQL playground + `_admin`)
-
-    ❯ cd server/prisma && prisma token
-
-Deploy `prisma` (when you make change to your data structure, to update database. Prisma server must be running)
-
-    ❯ npm run deploy-prisma:dev
+    ❯ npm run deploy-prisma
 
 ## Release
-Go to https://app.prisma.io/ and create an account. You will have an endpoint, for example: https://eu1.prisma.sh/YOUR-NAMESPACE
-From this enpoint, you can create your Prisma Prod service (`PRISMA_URL`): https://eu1.prisma.sh/YOUR-NAMESPACE/nexma/prod
+You will need a working MySQL database running somewhere (AWS, Heroku, etc)
 
-Make sure you have a `.env.prod` file for prisma and env variables set
-
-    ❯ cp server/prisma/.env.example server/prisma/.env.prod
-
-Also set these same variables in Now:
-  - in console, type `now secret add prisma_url PRISMA_URL`
-  - in console, type `now secret add prisma_management_api_secret PRISMA_MANAGEMENT_API_SECRET`
+Do these 4 steps once:
+  - in console, type `now secret add app_secret <APP_SECRET>`
+  - in console, type `now secret add database_url <DATABASE_URL>`
   - set `SERVER_URL` in `client/next.config.js`
   - set `SERVER_URL`and `CLIENT_URL` in `now.json`
 
-Then, release `prisma`, `client` and `server` in prod
+Then, each time you want to:
+  - release your datamodel in prod, you will have to execute your SQL migrations statements against your prod database
+    - these statements are in folder: `server/prisma/migrations`
+  - release `client` and `server` in prod, type:
 
     ❯ npm run release

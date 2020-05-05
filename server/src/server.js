@@ -1,20 +1,36 @@
 require('dotenv').config()
 
 const { GraphQLServer } = require('graphql-yoga')
+const { nexusPrismaPlugin } = require('nexus-prisma')
+const { makeSchema } = require('@nexus/schema')
 const cookieParser = require('cookie-parser')
 const { verify } = require('jsonwebtoken')
+const { PrismaClient } = require('@prisma/client')
 
-const { prisma } = require('./prisma-client')
-const { resolvers } = require('./resolvers')
+const types = require('./types')
 const { permissions } = require('./permissions')
 
 const server = new GraphQLServer({
-  typeDefs: `${__dirname}/schema.graphql`,
-  resolvers,
+  schema: makeSchema({
+    types,
+    plugins: [nexusPrismaPlugin()],
+    outputs: {
+      schema: `${process.cwd()}/src/generated/schema.graphql`,
+      typegen: `${process.cwd()}/src/generated/nexus.ts`,
+    },
+    typegenAutoConfig: {
+      sources: [
+        {
+          source: '@prisma/client',
+          alias: 'prisma'
+        }
+      ]
+    },
+  }),
   middlewares: [permissions],
   context: request => ({
     ...request,
-    prisma,
+    prisma: new PrismaClient(),
   }),
 })
 
@@ -23,7 +39,7 @@ server.express.use(cookieParser())
 server.express.use((request, response, next) => {
   const { token } = request.cookies
   if (token) {
-    const { userId } = verify(token, process.env.PRISMA_MANAGEMENT_API_SECRET)
+    const { userId } = verify(token, process.env.APP_SECRET)
     request.userId = userId
   }
   next()

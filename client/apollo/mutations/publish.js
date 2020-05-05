@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost'
 
 const publishMutation = gql`
-  mutation publish($id: ID!) {
+  mutation publish($id: String!) {
     publish(id: $id) {
       id
     }

@@ -46,8 +46,7 @@ export default function Nav() {
                   </Link>
                 </li>
                 <li>
-                  <button
-                    onClick={logout}>{ t('common:menu-logout', { name: me.name }) }</button>
+                  <button onClick={logout}>{ t('common:menu-logout', { name: me.name }) }</button>
                 </li>
               </>
             ) : (

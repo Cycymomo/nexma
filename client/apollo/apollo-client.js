@@ -5,8 +5,8 @@ import fetch from 'isomorphic-unfetch'
 // Export a HOC from next-with-apollo
 // Docs: https://www.npmjs.com/package/next-with-apollo
 export default withApollo(
-  // You can get headers and ctx (context) from the callback params
-  // e.g. ({ headers, ctx, initialState })
+  // You can get headers and context from the callback params
+  // e.g. ({ headers, context, initialState })
   ({ headers, initialState }) =>
     new ApolloClient({
       link: new HttpLink({
