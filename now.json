@@ -13,7 +13,7 @@
     },
     {
       "src": "server/src/server.js",
-      "use": "@now/node-server"
+      "use": "@now/node"
     }
   ],
   "rewrites": [
