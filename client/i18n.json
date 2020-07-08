@@ -4,7 +4,7 @@
   "currentPagesDir": "pages_",
   "finalPagesDir": "pages",
   "localesPath": "locales",
-  "redirectToDefaultLang": "true",
+  "defaultLangRedirect": "en",
   "pages": {
     "*": ["common"],
     "/": ["home"],
