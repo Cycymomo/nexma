@@ -17,14 +17,7 @@
       "config": { "maxLambdaSize": "20mb" }
     }
   ],
-  "routes": [
-    { "src": "/graphql", "dest": "/server/src/server.js" },
-    {
-      "src": "/(.*)",
-      "dest": "/client/$1",
-      "headers": {
-        "x-request-path": "$1"
-      }
-    }
+  "rewrites": [
+    { "source": "/graphql", "destination": "/server/src/server.js" }
   ]
 }
