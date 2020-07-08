@@ -18,6 +18,7 @@
     }
   ],
   "rewrites": [
-    { "source": "/graphql", "destination": "/server/src/server.js" }
+    { "source": "/graphql", "destination": "/server/src/server.js" },
+    { "source": "/(.*)", "destination": "/client/$1" }
   ]
 }
