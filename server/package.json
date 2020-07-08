@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node -r dotenv/config src/server.js"
+    "start": "node -r dotenv/config src/server.js",
+    "postinstall": "prisma generate --schema ./prisma/schema.prisma"
   },
   "dependencies": {
     "@nexus/schema": "^0.13.1",
