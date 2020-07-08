@@ -12,7 +12,6 @@ node_modules
 # production
 /build
 /client/pages/
-/server/src/generated/
 
 # misc
 .DS_Store
