@@ -13,8 +13,7 @@
     },
     {
       "src": "server/src/server.js",
-      "use": "@now/node",
-      "config": { "maxLambdaSize": "20mb" }
+      "use": "@now/node-server"
     }
   ],
   "rewrites": [

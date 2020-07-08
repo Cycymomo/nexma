@@ -16,7 +16,5 @@ ENV NODE_PATH=/usr/src/server/node_modules
 ENV PATH=/usr/src/server/node_modules/.bin/:${PATH}
 
 RUN npm install
-RUN cd prisma
-RUN npx prisma generate
 CMD ["npm", "start"]
 EXPOSE 4000
