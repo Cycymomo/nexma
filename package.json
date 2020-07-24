@@ -11,6 +11,6 @@
     "release": "now && now --prod"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.2.0"
+    "@prisma/cli": "^2.3.0"
   }
 }

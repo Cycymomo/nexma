@@ -12,7 +12,7 @@ export default function Post({
 
   return (
     <div className={css.post}>
-      <div>{ title }</div>
+      <h1>{ title }</h1>
       { name && <div>{ t('common:post-from', { name }) }</div> }
       <div className={css.date}>{ createdAt }</div>
       <div className={css.content}>{ content }</div>

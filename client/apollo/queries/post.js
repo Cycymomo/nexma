@@ -1,10 +1,12 @@
 import { gql } from 'apollo-boost'
 
-const feedQuery = gql`
-  query feed {
-    feed {
+const postQuery = gql`
+  query post($id: String!) {
+    post(id: $id) {
       id
+      published
       title
+      content
       author {
         name
       }
@@ -14,4 +16,4 @@ const feedQuery = gql`
   }
 `
 
-export default feedQuery
+export default postQuery

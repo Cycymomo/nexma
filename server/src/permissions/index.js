@@ -18,6 +18,7 @@ const permissions = shield({
   Query: {
     me: allow,
     feed: allow,
+    post: allow,
   },
   Mutation: {
     signup: not(rules.isAuthenticatedUser),

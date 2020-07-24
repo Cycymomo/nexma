@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
 import useTranslation from 'next-translate/useTranslation'
@@ -7,7 +8,6 @@ import useTranslation from 'next-translate/useTranslation'
 import Loading from '../components/Loading'
 import Error from '../components/Error'
 import Nav from '../components/Nav'
-import Post from '../components/Post'
 
 import feedQuery from '../apollo/queries/feed'
 
@@ -43,13 +43,24 @@ export default function Home() {
             value={search} onChange={e => setSearch(e.target.value)} />
         </div>
         <div>
-          {
-            renderFeed && renderFeed.length > 0
-              ? renderFeed.map(post => <Post key={post.id} post={post} />)
-              : (
-                search ? <>{ t('home:no-results') }</> : <>{ t('home:no-published') }</>
-              )
-          }
+          <ul>
+            {
+              renderFeed && renderFeed.length > 0
+                ? renderFeed.map(({ id, title, author: { name } = {}, createdAt }) => (
+                  <li key={id}>
+                    <Link href="/posts/[id]" as={`/posts/${id}`}>
+                      <a>{ title }</a>
+                    </Link>
+                    <small>
+                    , { name && <>{ t('common:post-from', { name }) }, { createdAt }</> }
+                    </small>
+                  </li>
+                ))
+                : (
+                  search ? <li>{ t('home:no-results') }</li> : <li>{ t('home:no-published') }</li>
+                )
+            }
+          </ul>
         </div>
       </div>
     </>

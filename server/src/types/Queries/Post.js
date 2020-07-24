@@ -1,4 +1,4 @@
-const { queryField } = require('@nexus/schema')
+const { queryField, stringArg } = require('@nexus/schema')
 
 const feed = queryField('feed', {
   type: 'Post',
@@ -10,6 +10,19 @@ const feed = queryField('feed', {
   },
 })
 
+const post = queryField('post', {
+  type: 'Post',
+  args: {
+    id: stringArg(),
+  },
+  resolve: (parent, { id }, context) => {
+    return context.prisma.post.findOne({
+      where: { id },
+    })
+  },
+})
+
 module.exports = {
   feed,
+  post,
 }
