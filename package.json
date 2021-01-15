@@ -6,7 +6,7 @@
   "scripts": {
     "deploy-prisma": "cd ./server/prisma && npx prisma migrate save --experimental && dotenv -e .env -- npx prisma migrate up --experimental && npx prisma generate",
     "deploy-prisma:prod": "cd ./server/prisma && dotenv -e .env.prod -- npx prisma migrate up --experimental",
-    "release": "deploy-prisma:prod && now && now --prod"
+    "release": "npm run deploy-prisma:prod && now && now --prod"
   },
   "devDependencies": {
     "@prisma/cli": "2.8.1"
