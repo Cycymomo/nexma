@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
+import Link from 'next-translate/Link'
 import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
 import useTranslation from 'next-translate/useTranslation'
@@ -57,7 +57,7 @@ export default function Home() {
                   </li>
                 ))
                 : (
-                  search ? <li>{ t('home:no-results') }</li> : <li>{ t('home:no-published') }</li>
+                  search ? <li>{ t('common:no-results') }</li> : <li>{ t('home:no-published') }</li>
                 )
             }
           </ul>

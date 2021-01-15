@@ -27,3 +27,11 @@
     color: red;
   }
 }
+
+.comments {
+  border: solid thin black;
+}
+
+.comment {
+  padding-bottom: 10px;
+}

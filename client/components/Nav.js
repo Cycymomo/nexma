@@ -9,9 +9,6 @@ import Error from './Error'
 import logoutMutation from '../apollo/mutations/logout'
 import meQuery from '../apollo/queries/me'
 
-import css from "../styles/main.css"
-
-
 export default function Nav() {
   const { t, lang } = useTranslation()
   const { data: { me } = {}, loading, refetch } = useQuery(meQuery)
@@ -19,11 +16,12 @@ export default function Nav() {
     onCompleted() {
       refetch()
       Router.pushI18n('/')
+      Router.reload()
     }
   })
 
   return (
-    <nav className={css.menu}>
+    <nav className="menu">
       <Error type="logout" error={error ? JSON.stringify(error) : ''} />
       <ul>
         <li>

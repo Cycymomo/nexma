@@ -1,4 +1,6 @@
 {
   "enter-title": "Entre un titre ...",
-  "enter-content": "... puis ton post"
+  "enter-content": "... puis ton post",
+  "enter-comment": "Entre ton commentaire",
+  "comments-list": "Liste des commentaires"
 }

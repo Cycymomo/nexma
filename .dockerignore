@@ -1,6 +1,0 @@
-.git
-node_modules
-build
-.vscode
-.gitignore
-npm-debug.log

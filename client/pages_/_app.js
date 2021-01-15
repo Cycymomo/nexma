@@ -5,6 +5,9 @@ import { ApolloProvider } from '@apollo/react-hooks'
 
 import withData from '../apollo/apollo-client'
 
+import cssMain from '../styles/main.css'
+import cssPost from '../styles/components/post.css'
+
 class MyApp extends App {
   render() {
     const { Component, pageProps, apollo } = this.props

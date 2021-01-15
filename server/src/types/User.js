@@ -7,6 +7,7 @@ const User = objectType({
     t.model.name()
     t.model.email()
     t.model.posts({ pagination: false })
+    t.model.comments({ pagination: false })
     t.model.createdAt()
     t.model.updatedAt()
   },

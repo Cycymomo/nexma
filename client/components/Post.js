@@ -1,7 +1,10 @@
+import Router from 'next-translate/Router'
 import useTranslation from 'next-translate/useTranslation'
 
+import Error from './Error'
+import Comment from './Error'
+
 import feedQuery from '../apollo/queries/feed'
-import css from "../styles/components/post.css"
 
 export default function Post({
   post: { id, title, content, published, createdAt, updatedAt, author: { name } = {} },
@@ -11,15 +14,17 @@ export default function Post({
   const params = { variables: { id }, refetchQueries: [{ query: feedQuery }] }
 
   return (
-    <div className={css.post}>
-      <h1>{ title }</h1>
-      { name && <div>{ t('common:post-from', { name }) }</div> }
-      <div className={css.date}>{ createdAt }</div>
-      <div className={css.content}>{ content }</div>
-      <div className={css.action}>
-        { !published && publish && <button onClick={() => publish(params)} disabled={loadingPublish}>{ t('common:action-publish') }</button> }
-        { deletePost && <button className={css.delete} onClick={() => deletePost(params)} disabled={loadingDelete}>{ t('common:action-delete') }</button> }
+    <>
+      <div className="post">
+        <h1>{ title }</h1>
+        { name && <div>{ t('common:post-from', { name }) }</div> }
+        <div className="date">{ createdAt }</div>
+        <div className="content">{ content }</div>
+        <div className="action">
+          { !published && publish && <button onClick={() => publish(params)} disabled={loadingPublish}>{ t('common:action-publish') }</button> }
+          { deletePost && <button className="delete" onClick={() => deletePost(params)} disabled={loadingDelete}>{ t('common:action-delete') }</button> }
+        </div>
       </div>
-    </div>
+    </>
   )
 }

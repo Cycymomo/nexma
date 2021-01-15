@@ -10,6 +10,18 @@ const postQuery = gql`
       author {
         name
       }
+      comments {
+        id
+        content
+        author {
+          name
+        }
+        post {
+          id
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
