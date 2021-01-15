@@ -13,8 +13,6 @@ import meQuery from '../apollo/queries/me'
 import publishMutation from '../apollo/mutations/publish'
 import deletePostMutation from '../apollo/mutations/deletePost'
 
-import css from "../styles/profile.css"
-
 export default function Profile() {
   const { t, lang } = useTranslation()
   const [mode, setMode] = useState('draft')
@@ -57,7 +55,7 @@ export default function Profile() {
           <button style={{ color: mode === 'published' ? 'blue' : 'black' }} onClick={() => setMode('published')}>{ t('profile:title-published') }</button>
         </div>
       </div>
-      <div className={css.posts}>
+      <div className="posts">
         <Error type="publish" error={errorPublish ? JSON.stringify(errorPublish) : ''} />
         <Error type="delete" error={errorDelete ? JSON.stringify(errorDelete) : ''} />
         {

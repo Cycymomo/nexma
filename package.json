@@ -4,13 +4,11 @@
   "author": "Cyril Moreau <cyril.moreau0804@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "docker-compose up -d --build",
-    "stop": "docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)",
-    "clean": "docker rmi $(docker images -q)",
-    "deploy-prisma": "cd ./server/prisma && npx prisma migrate save --experimental && npx prisma migrate up --experimental && npx prisma generate",
-    "release": "now && now --prod"
+    "deploy-prisma": "cd ./server/prisma && npx prisma migrate save --experimental && dotenv -e .env -- npx prisma migrate up --experimental && npx prisma generate",
+    "deploy-prisma:prod": "cd ./server/prisma && dotenv -e .env.prod -- npx prisma migrate up --experimental",
+    "release": "deploy-prisma:prod && now && now --prod"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.3.0"
+    "@prisma/cli": "2.8.1"
   }
 }

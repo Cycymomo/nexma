@@ -1,4 +1,6 @@
 {
   "enter-title": "Enter a title",
-  "enter-content": "Enter a content"
+  "enter-content": "Enter a content",
+  "enter-comment": "Enter a comment",
+  "comments-list": "Comments list"
 }

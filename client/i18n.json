@@ -10,6 +10,7 @@
     "/": ["home"],
     "/profile": ["profile"],
     "/post": ["post"],
+    "/posts/[id]": ["post"],
     "/login": ["authent"],
     "/signup": ["authent"]
   }

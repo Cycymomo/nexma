@@ -12,9 +12,20 @@ const rules = {
 
     return context.request.userId === authorId
   }),
+  isCommentOwner: rule()(async (parent, { id }, context) => {
+    const { id: authorId } = await context.prisma.comment.findOne({
+      where: { id }
+    })
+    .author()
+
+    return context.request.userId === authorId
+  }),
 }
 
 const permissions = shield({
+  Subscription: {
+    commentAdded: allow,
+  },
   Query: {
     me: allow,
     feed: allow,
@@ -27,6 +38,8 @@ const permissions = shield({
     createDraft: rules.isAuthenticatedUser,
     deletePost: rules.isPostOwner,
     publish: rules.isPostOwner,
+    createComment: rules.isAuthenticatedUser,
+    deleteComment: rules.isCommentOwner,
   },
 })
 

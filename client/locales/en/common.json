@@ -14,5 +14,6 @@
   "action-delete": "Delete",
   "action-login": "Login",
   "action-signup": "Sign Up",
-  "post-from": "a post from {{name}}"
+  "post-from": "a post from {{name}}",
+  "no-results": "No results."
 }

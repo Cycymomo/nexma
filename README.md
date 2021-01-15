@@ -1,10 +1,13 @@
 # Nexma - Next.js with Apollo and Prisma
 
 ## Prerequisites
-  - Install Docker for your OS
   - Install Node & npx
 
     ❯ npm i -g npx
+
+  - Install dotenv
+
+    ❯ npm i -g dotenv
 
   - Install Now
 
@@ -12,11 +15,14 @@
 
   - Create your `.env` files and set your env
 
-    ❯ cp .env.example .env && cp server/.env.example server/.env
+    ❯ cp .env.example .env
+    ❯ cp server/.env.example server/.env
     ❯ cp server/prisma/.env.example server/prisma/.env
 
 ## Dev
-You just have to type `npm start` and it will run: mysql, server and client inside Docker.
+This project is using `MySQL`. You're database must be running.
+
+Run the client `cd client && npm run dev` and run the server `cd server && npm start`
 
 ## Client
 Code is in the `client` directory.
@@ -45,15 +51,10 @@ Update your local database depending of your shema file
 ## Release
 You will need a working MySQL database running somewhere (AWS, Heroku, etc)
 
-Do these 4 steps once:
+Do these 4 steps only once:
   - in console, type `now secret add app_secret <APP_SECRET>`
   - in console, type `now secret add database_url <DATABASE_URL>`
   - set `SERVER_URL` in `client/next.config.js`
   - set `SERVER_URL`and `CLIENT_URL` in `now.json`
 
-Then, each time you want to:
-  - release your datamodel in prod, you will have to execute your SQL migrations statements against your prod database
-    - these statements are in folder: `server/prisma/migrations`
-  - release `client` and `server` in prod, type:
-
-    ❯ npm run release
+Then, each time you want to release in prod: `npm run release`

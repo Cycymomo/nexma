@@ -1,7 +1,4 @@
-const withCSS = require('@zeit/next-css')
-
-module.exports = withCSS({
-  cssModules: true,
+module.exports = {
   webpackDevMiddleware: config => {
     config.watchOptions = {
       poll: 1000, // check changes every second
@@ -12,4 +9,4 @@ module.exports = withCSS({
   env: {
     SERVER_URL: 'https://nexma.now.sh/graphql'
   },
-})
+}

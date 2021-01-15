@@ -14,6 +14,16 @@ const meQuery = gql`
         createdAt
         updatedAt
       }
+      comments {
+        id
+        content
+        post {
+          id
+          title
+        }
+        createdAt
+        updatedAt
+      }
     }
   }
 `
